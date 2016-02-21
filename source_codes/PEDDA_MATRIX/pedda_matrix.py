@@ -84,6 +84,7 @@ for a in open(finrep):
             if x==0:continue
             anims.append(line[x])
             genos.append([])
+            genos.append([])
         continue
     snp,geno=a.strip().split(sep,1)
     outmap.write('%s %s 0 %s\n' % (conv[snp][0],snp,conv[snp][1]))
