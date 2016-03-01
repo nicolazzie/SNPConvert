@@ -1,7 +1,7 @@
 '''
 Created on Nov 6, 2015
 
-@author: Ezequiel Luis Nicolazzi, PTP Science Park, Lodi, Nov 2015
+@author: Ezequiel Luis Nicolazzi
 '''
 
 import os,sys,time
@@ -121,6 +121,7 @@ class Main(QtGui.QMainWindow):
         if not self.inputSnpMapFile_tab1 or self.inputSnpMapFile_tab1.isEmpty():return self.ui.Log_wdg_tab1.append("<font color=red><b>ERROR: Please select a SNP map file!</b></font>")
         if not self.BrdCode_tab1:self.BrdCode_tab1 = 'UNKN_BRD'
         if not self.OutName_tab1:self.OutName_tab1 = 'Output_name'
+        
         ### Print the options used
         self.ui.Log_wdg_tab1.append("<b><i>PEDDA MATRIX software - ILMN Matrix --> PLINK</i></b>")
         self.ui.Log_wdg_tab1.append("<i>Conversion and GUI coded by E.L.Nicolazzi (PTP)</i><br>")
@@ -186,7 +187,8 @@ class Main(QtGui.QMainWindow):
                 for x in range(len(line)):
                     if x==0:continue
                     anims.append(line[x]) # keep trace of individual IDs
-                    genos.append([])      # create a list n.individuals long 
+                    genos.append([])
+                    genos.append([])      # create a list n.individuals long x2
                 continue              # Jump to the genotypes
             #If it is a , or \t separator, do it easy, otherise 
             snp,geno=a.strip().split(sep,1)
@@ -243,6 +245,7 @@ class Main(QtGui.QMainWindow):
         if not self.inputSnpMapFile_tab2 or self.inputSnpMapFile_tab2.isEmpty():return self.ui.Log_wdg_tab2.append("<font color=red><b>ERROR: Please select a SNP map file!</b></font>")
         if not self.BrdCode_tab2:self.BrdCode_tab2 = 'UNKN_BRD'
         if not self.OutName_tab2:self.OutName_tab2 = 'Output_name'
+                
         ### Print the options used
         self.ui.Log_wdg_tab2.append("<b><i>Pedda ROW software - ILMN ROW --> PLINK</i></b>")
         self.ui.Log_wdg_tab2.append("<i>Conversion and GUI coded by E.L.Nicolazzi (PTP)</i><br>")
@@ -421,7 +424,13 @@ class Main(QtGui.QMainWindow):
         if self.INChosen_allele[:4]=='ILMN' and self.OUTChosen_allele[:4]!='ILMN':return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Input and Output allele coding MUST be compatible (ILMN-ILMN, AFFY-AFFY or NO-NO)!</b></font>")
         if self.INChosen_allele[:4]=='AFFY' and self.OUTChosen_allele[:4]!='AFFY':return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Input and Output allele coding MUST be compatible (ILMN-ILMN, AFFY-AFFY or NO-NO)!</b></font>")
         if self.INChosen_allele[:2]=='NO' and self.OUTChosen_allele[:2]!='NO':return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Input and Output allele coding MUST be compatible (ILMN-ILMN, AFFY-AFFY or NO-NO)!</b></font>")
-        
+
+        if os.path.basename(str(self.inputPedFile_tab3)) == self.OutName_tab3+'.ped': 
+            return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Bad output name - Must be different from PED filename!</b></font>")
+        if os.path.basename(str(self.inputMapFile_tab3)) == self.OutName_tab3+'.map': 
+            return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Bad output name - Must be different from MAP filename!</b></font>")
+
+
         ### Print the options used
         answer={True:'Yes',False:'No'}
         self.ui.Log_wdg_tab3.append("<b><i>iConvert software - Allele conversion and map update <i></b>")
@@ -522,7 +531,7 @@ class Main(QtGui.QMainWindow):
             #Rebuild the (full) path of the original inputMapFile_tab3 - for compatibility with Windows
             outnammap = direct_name+slsh+self.OutName_tab3+'.map'
             remap=open(outnammap,'w')
-
+        enmap=0
         for enmap,line in enumerate(open(self.inputMapFile_tab3)):
             #Check for tab or blank space spearator (only these 2 are accepted here)       
             if enmap == 0: 
@@ -536,6 +545,7 @@ class Main(QtGui.QMainWindow):
             if not SNPdata.has_key(linea[1]):return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: SNP: "+ snp +" not found in SNPchimp file. Probable causes: you downloaded the wrong SNPchip or modified SNP names </b></font>") 
             else:convert.append(SNPdata[linea[1]])
             if self.UpdateMap:remap.write('%s %s %s %s\n' % (mapupd[snp][0],snp,linea[2],mapupd[snp][1]))
+        if enmap==0:return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: MAP file is empty!</b></font>")
         self.ui.Log_wdg_tab3.append("- Rows read in PLINK MAP file (number of SNPs) : <b>%s</b>" % str(enmap+1))
         if self.UpdateMap: self.ui.Log_wdg_tab3.append("<font color=blue>- MAP file updated: <b>%s</b></font>" % outnammap)
 
@@ -553,6 +563,7 @@ class Main(QtGui.QMainWindow):
 
             reped=open(outnamped,'w')
             #Read ped file
+            enped=0
             for enped,line in enumerate(open(self.inputPedFile_tab3)):
                 if enped == 0:
                     test = line.strip().split('\t')
@@ -580,6 +591,7 @@ class Main(QtGui.QMainWindow):
                     return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Individual " + pedline[1] + " failed conversion for " + str(nfailed) + \
                                                        " SNPs. Probably their IN format is not as specified (or you specified a wrong missing value)</font>")
                 reped.write('%s %s\n' % (' '.join(pedline[:6]),' '.join(genout)))
+            if enped==0:return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: PED file is empty!</b></font>")
             self.ui.Log_wdg_tab3.append("- Rows read in PLINK PED file (number of animals) : <b>%s</b>" % str(enped + 1))
             self.ui.Log_wdg_tab3.append("<font color=blue>- PED file updated: <b>%s</b></font><br><br>" % outnamped)
         self.ui.Log_wdg_tab3.append('<br><font color=green><b> PROGRAM ENDS OK! </b></font>')
