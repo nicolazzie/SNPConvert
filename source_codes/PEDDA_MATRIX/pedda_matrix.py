@@ -18,7 +18,7 @@ import sys,os
 print "#"*60
 print "###                                                      ### "
 print "###               PEDDA MATRIX software                  ### "
-print "###      Converts Illumina row fmt into PLINK fmt        ### "
+print "###      Converts Illumina MATRIX fmt into PLINK fmt     ### "
 print "###                                                      ### "
 print "###                              Coded by: E.L.Nicolazzi ### "
 print "#"*60

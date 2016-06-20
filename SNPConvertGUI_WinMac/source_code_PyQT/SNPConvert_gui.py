@@ -22,10 +22,10 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_MainWindow(object):
+class Ui_SNPConvert(object):
     def setupUi(self, SNPConvert):
         SNPConvert.setObjectName(_fromUtf8("SNPConvert"))
-        SNPConvert.setGeometry(QtCore.QRect(0, 0, 1153, 620))
+        SNPConvert.resize(1153, 620)
         self.centralwidget = QtGui.QWidget(SNPConvert)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.gridLayout_2 = QtGui.QGridLayout(self.centralwidget)
@@ -408,52 +408,136 @@ class Ui_MainWindow(object):
         SNPConvert.setStatusBar(self.statusbar)
 
         self.retranslateUi(SNPConvert)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(SNPConvert)
 
     def retranslateUi(self, SNPConvert):
-        SNPConvert.setWindowTitle(_translate("MainWindow", "SNPConvert v1.0", None))
-        self.Output_lbl_tab2.setText(_translate("MainWindow", " Output specifics", None))
-        self.SnpMap_tab2.setText(_translate("MainWindow", "Select Map", None))
-        self.Input_lbl_tab2.setText(_translate("MainWindow", "Input specifics", None))
-        self.AlleleCod_lbl_tab2.setText(_translate("MainWindow", "Output allele code", None))
-        self.FinRep_tab2.setText(_translate("MainWindow", "Select Final Report", None))
-        self.ConvertFile_tab2.setText(_translate("MainWindow", "Convert to PLINK", None))
-        self.Title_lbl_tab2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:600;\">Pedda </span><span style=\" font-size:22pt; font-weight:600; font-style:italic; color:#0000ff;\">ROW</span><span style=\" font-size:22pt; font-weight:600;\"> software</span></p><p align=\"center\"><br/><span style=\" font-size:14pt; font-weight:600;\">Illumina ROW format files to PLINK (ped/map) converter</span></p></body></html>", None))
-        self.outname_lbl_tab2.setText(_translate("MainWindow", "Output name", None))
-        self.FinalReport_lbl_tab2.setText(_translate("MainWindow", "Final Report file", None))
-        self.SnpMap_lbl_tab2.setText(_translate("MainWindow", "SNP map (original)", None))
-        self.Log_lbl_tab2.setText(_translate("MainWindow", "Runtime log", None))
-        self.BrdCode_lbl_tab2.setText(_translate("MainWindow", "Population ID", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_ROW), _translate("MainWindow", "Illumina ROW format", None))
-        self.BrdCode_lbl_tab1.setText(_translate("MainWindow", "Population ID", None))
-        self.SnpMap_lbl_tab1.setText(_translate("MainWindow", "SNP map (original)", None))
-        self.Log_lbl_tab1.setText(_translate("MainWindow", "Runtime log", None))
-        self.Output_lbl_tab1.setText(_translate("MainWindow", " Output specifics", None))
-        self.Title_lbl_tab1.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:600;\">Pedda </span><span style=\" font-size:22pt; font-weight:600; font-style:italic; color:#ff0000;\">MATRIX</span><span style=\" font-size:22pt; font-weight:600;\"> software</span></p><p align=\"center\"><br/><span style=\" font-size:14pt; font-weight:600;\">Illumina MATRIX format files to PLINK (ped/map) converter</span></p></body></html>", None))
-        self.ConvertFile_tab1.setText(_translate("MainWindow", "Convert to PLINK", None))
-        self.SnpMap_tab1.setText(_translate("MainWindow", "Select Map", None))
-        self.FinalReport_lbl_tab1.setText(_translate("MainWindow", "Final Report file", None))
-        self.FinRep_tab1.setText(_translate("MainWindow", "Select Final Report", None))
-        self.Input_lbl_tab1.setText(_translate("MainWindow", "Input specifics", None))
-        self.outname_lbl_tab1.setText(_translate("MainWindow", "Output name", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_MATRIX), _translate("MainWindow", "Illumina MATRIX format", None))
-        self.SnpChimp_lbl_tab3.setText(_translate("MainWindow", "SNPchimp file", None))
-        self.AlleleCodIn_lbl_tab3.setText(_translate("MainWindow", "Input allele coding", None))
-        self.outname_lbl_tab3.setText(_translate("MainWindow", "Output name", None))
-        self.YesRadioButton_tab3.setText(_translate("MainWindow", "Yes", None))
-        self.NoRadioButton_tab3.setText(_translate("MainWindow", "No", None))
-        self.Output_lbl_tab3.setText(_translate("MainWindow", " Output specifics", None))
-        self.Title_lbl_tab3.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:600; color:#138f46;\">iConvert</span><span style=\" font-size:22pt; font-weight:600; color:#000000;\"> software</span></p><p align=\"center\"><span style=\" color:#000000;\"><br/></span><span style=\" font-size:14pt; font-weight:600; color:#000000;\">Allele format and map converter for PLINK (ped/map) files</span></p></body></html>", None))
-        self.PedFile_tab3.setText(_translate("MainWindow", "Select PED file", None))
-        self.MapFile_lbl_tab3.setText(_translate("MainWindow", "PLINK format MAP file", None))
-        self.PedFile_lbl_tab3.setText(_translate("MainWindow", "PLINK format PED file", None))
-        self.SnpChimp_tab3.setText(_translate("MainWindow", "Select SNPchimp", None))
-        self.Input_lbl_tab3.setText(_translate("MainWindow", "Input specifics", None))
-        self.Log_lbl_tab3.setText(_translate("MainWindow", "Runtime log", None))
-        self.UpdateMap_lbl.setText(_translate("MainWindow", "Update map info", None))
-        self.AlleleCodOut_lbl_tab3.setText(_translate("MainWindow", "Output allele coding", None))
-        self.ConvertFile_tab3.setText(_translate("MainWindow", "Run iConvert", None))
-        self.MapFile_tab3.setText(_translate("MainWindow", "Select MAP file", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_iConvert), _translate("MainWindow", "iConvert software", None))
+        SNPConvert.setWindowTitle(_translate("SNPConvert", "SNPConvert v1.0", None))
+        self.Output_lbl_tab2.setText(_translate("SNPConvert", "Select output formats and filename", None))
+        self.SnpMap_tab2.setToolTip(_translate("SNPConvert", "<html><head/><body><p>Please select an Illumina <span style=\" font-weight:600;\">SnpMap</span> file.</p><p>Example:</p>\n"
+"<p><span style=\" font-style:italic;\">Index Name Chromosome Position GenTrain Score SNP ILMN Strand Customer Strand NormID</span>\n"
+"<br><span style=\" font-style:italic;\">1 snp1 1 10 0.9151 [A/C] TOP TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">2 snp2 1 100 0.8887 [A/G] TOP BOT 0</span>\n"
+"<br><span style=\" font-style:italic;\">3 snp3 1 335 0.8174 [A/G] TOP TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">4 snp4 1 467 0.8232 [A/G] TOP TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">5 snp5 1 652 0.7927 [T/C] BOT TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">6 snp6 2 12 0.7399 [T/C] BOT BOT 0</span>\n"
+"<br><span style=\" font-style:italic;\">7 snp7 2 259 0.7650 [T/G] BOT TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">8 snp8 2 366 0.9243 [T/C] BOT TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">9 snp9 2 411 0.8912 [T/C] BOT BOT 0</span>\n"
+"<br><span style=\" font-style:italic;\">10 snp10 2 545 0.9241 [T/C] BOT BOT 0</span></p></body></html>", None))
+        self.SnpMap_tab2.setText(_translate("SNPConvert", "Select SnpMap", None))
+        self.Input_lbl_tab2.setText(_translate("SNPConvert", "Select input files and formats", None))
+        self.AlleleCod_lbl_tab2.setText(_translate("SNPConvert", "Output allele code", None))
+        self.FinRep_tab2.setToolTip(_translate("SNPConvert", "<html><head/><body><p>Please select an Illumina FinalReport file in <span style=\" font-weight:600;\">ROW </span>format.</p><p>Example: </p>\n"
+"<p><span style=\" font-style:italic;\">[Header]</span>\n"
+"<br><span style=\" font-style:italic;\">GSGT Version 1.1.1</span>\n"
+"<br><span style=\" font-style:italic;\">Processing Date 1/1/1000 0:00 PM</span>\n"
+"<br><span style=\" font-style:italic;\">Content testfile.bpm</span>\n"
+"<br><span style=\" font-style:italic;\">Num SNPs 10</span>\n"
+"<br><span style=\" font-style:italic;\">Total SNPs 10</span>\n"
+"<br><span style=\" font-style:italic;\">Num Samples 2</span>\n"
+"<br><span style=\" font-style:italic;\">Total Samples 2</span>\n"
+"<br><span style=\" font-style:italic;\">[Data]</span>\n"
+"<br><span style=\" font-style:italic;\">SNP Name Sample ID Allele1 - Top Allele2 - Top GC Score</span>\n"
+"<br><span style=\" font-style:italic;\">snp1 ANIM_38 A C 0.8143</span>\n"
+"<br><span style=\" font-style:italic;\">snp2 ANIM_38 A G 0.5647</span>\n"
+"<br><span style=\" font-style:italic;\">snp3 ANIM_38 A A 0.5620</span>\n"
+"<br><span style=\" font-style:italic;\">snp4 ANIM_38 A A 0.4777</span>\n"
+"<br><span style=\" font-style:italic;\">snp5 ANIM_38 G G 0.7372</span>\n"
+"<br><span style=\" font-style:italic;\">snp6 ANIM_38 A A 0.5613</span>\n"
+"<br><span style=\" font-style:italic;\">snp7 ANIM_38 A C 0.6411</span>\n"
+"<br><span style=\" font-style:italic;\">snp8 ANIM_38 A A 0.4614</span>\n"
+"<br><span style=\" font-style:italic;\">snp9 ANIM_38 A G 0.6916</span>\n"
+"<br><span style=\" font-style:italic;\">snp10 ANIM_38 A G 0.7925</span>\n"
+"<br><span style=\" font-style:italic;\">snp1 ANIM_39 C C 0.8143</span>\n"
+"<br><span style=\" font-style:italic;\">snp2 ANIM_39 A G 0.5647</span>\n"
+"<br><span style=\" font-style:italic;\">snp3 ANIM_39 A A 0.5620</span>\n"
+"<br><span style=\" font-style:italic;\">snp4 ANIM_39 A A 0.4777</span>\n"
+"<br><span style=\" font-style:italic;\">snp5 ANIM_39 A G 0.7372</span>\n"
+"<br><span style=\" font-style:italic;\">snp6 ANIM_39 A A 0.5613</span>\n"
+"<br><span style=\" font-style:italic;\">snp7 ANIM_39 A C 0.6411</span>\n"
+"<br><span style=\" font-style:italic;\">snp8 ANIM_39 A A 0.4614</span>\n"
+"<br><span style=\" font-style:italic;\">snp9 ANIM_39 A G 0.6916</span>\n"
+"<br><span style=\" font-style:italic;\">snp10 ANIM_39 A A 0.7925</span></p></body></html>", None))
+        self.FinRep_tab2.setText(_translate("SNPConvert", "Select Final Report", None))
+        self.ConvertFile_tab2.setText(_translate("SNPConvert", "Convert to PLINK", None))
+        self.Title_lbl_tab2.setText(_translate("SNPConvert", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:600;\">Pedda </span><span style=\" font-size:22pt; font-weight:600; font-style:italic; color:#0000ff;\">ROW</span><span style=\" font-size:22pt; font-weight:600;\"> software</span></p><p align=\"center\"><br/><span style=\" font-size:14pt; font-weight:600;\">Illumina ROW format files to PLINK (ped/map) converter</span></p></body></html>", None))
+        self.outname_lbl_tab2.setText(_translate("SNPConvert", "Output name", None))
+        self.OutName_tab2.setToolTip(_translate("SNPConvert", "<html><head/><body><p>PLINK output name (optional).</p><p>Example: <span style=\" font-style:italic;\">If user inputs &quot;PEDDA&quot; in this field, then he will obtain a PEDDA.ped and PEDDA.map file if conversion is successfu</span>l.</p></body></html>", None))
+        self.BrdCode_tab2.setToolTip(_translate("SNPConvert", "<html><head/><body><p>Population ID will be used as first column in the .ped file (optional)</p></body></html>", None))
+        self.FinalReport_lbl_tab2.setText(_translate("SNPConvert", "Final Report file", None))
+        self.SnpMap_lbl_tab2.setText(_translate("SNPConvert", "Illumina SnpMap", None))
+        self.Log_lbl_tab2.setText(_translate("SNPConvert", "Runtime log", None))
+        self.BrdCode_lbl_tab2.setText(_translate("SNPConvert", "Population ID", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_ROW), _translate("SNPConvert", "Illumina ROW format", None))
+        self.BrdCode_lbl_tab1.setText(_translate("SNPConvert", "Population ID", None))
+        self.SnpMap_lbl_tab1.setText(_translate("SNPConvert", "Illumina SnpMap", None))
+        self.Log_lbl_tab1.setText(_translate("SNPConvert", "Runtime log", None))
+        self.BrdCode_tab1.setToolTip(_translate("SNPConvert", "<html><head/><body><p>Population ID will be used as first column in the .ped file (optional)</p></body></html>", None))
+        self.Output_lbl_tab1.setText(_translate("SNPConvert", "Select output formats and filename", None))
+        self.Title_lbl_tab1.setText(_translate("SNPConvert", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:600;\">Pedda </span><span style=\" font-size:22pt; font-weight:600; font-style:italic; color:#ff0000;\">MATRIX</span><span style=\" font-size:22pt; font-weight:600;\"> software</span></p><p align=\"center\"><br/><span style=\" font-size:14pt; font-weight:600;\">Illumina MATRIX format files to PLINK (ped/map) converter</span></p></body></html>", None))
+        self.ConvertFile_tab1.setText(_translate("SNPConvert", "Convert to PLINK", None))
+        self.OutName_tab1.setToolTip(_translate("SNPConvert", "<html><head/><body><p>PLINK output name (optional).</p><p>Example: <span style=\" font-style:italic;\">If user inputs &quot;PEDDA&quot; in this field, then he will obtain a PEDDA.ped and PEDDA.map file if conversion is successfu</span>l.</p></body></html>", None))
+        self.SnpMap_tab1.setToolTip(_translate("SNPConvert", "<html><head/><body><p>Please select an Illumina <span style=\" font-weight:600;\">SnpMap</span> file.</p><p>Example:</p>\n"
+"<p><span style=\" font-style:italic;\">Index Name Chromosome Position GenTrain Score SNP ILMN Strand Customer Strand NormID</span>\n"
+"<br><span style=\" font-style:italic;\">1 snp1 1 10 0.9151 [A/C] TOP TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">2 snp2 1 100 0.8887 [A/G] TOP BOT 0</span>\n"
+"<br><span style=\" font-style:italic;\">3 snp3 1 335 0.8174 [A/G] TOP TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">4 snp4 1 467 0.8232 [A/G] TOP TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">5 snp5 1 652 0.7927 [T/C] BOT TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">6 snp6 2 12 0.7399 [T/C] BOT BOT 0</span>\n"
+"<br><span style=\" font-style:italic;\">7 snp7 2 259 0.7650 [T/G] BOT TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">8 snp8 2 366 0.9243 [T/C] BOT TOP 0</span>\n"
+"<br><span style=\" font-style:italic;\">9 snp9 2 411 0.8912 [T/C] BOT BOT 0</span>\n"
+"<br><span style=\" font-style:italic;\">10 snp10 2 545 0.9241 [T/C] BOT BOT 0</span></p></body></html>", None))
+        self.SnpMap_tab1.setText(_translate("SNPConvert", "Select SnpMap", None))
+        self.FinalReport_lbl_tab1.setText(_translate("SNPConvert", "Final Report file", None))
+        self.FinRep_tab1.setToolTip(_translate("SNPConvert", "<html><head/><body><p>Please select an Illumina FinalReport file in <span style=\" font-weight:600;\">MATRIX </span>format.</p>\n"
+"<p>Example:</p>\n"
+"<p><span style=\" font-style:italic;\">[Header]</span>\n"
+"<br><span style=\" font-style:italic;\">GSGT Version 1.1.1</span>\n"
+"<br><span style=\" font-style:italic;\">Processing Date,1/1/1000 0:00 PM</span>\n"
+"<br><span style=\" font-style:italic;\">Content testfile.bpm</span>\n"
+"<br><span style=\" font-style:italic;\">Num SNPs,10</span>\n"
+"<br><span style=\" font-style:italic;\">Total SNPs,10</span>\n"
+"<br><span style=\" font-style:italic;\">Num Samples,2</span>\n"
+"<br><span style=\" font-style:italic;\">Total Samples,2</span>\n"
+"<br><span style=\" font-style:italic;\">[Data]</span>\n"
+"<br><span style=\" font-style:italic;\">,ANIM_38,ANIM_39</span>\n"
+"<br><span style=\" font-style:italic;\">snp1,AB,BB</span>\n"
+"<br><span style=\" font-style:italic;\">snp2,AB,AB</span>\n"
+"<br><span style=\" font-style:italic;\">snp3,AA,AA</span>\n"
+"<br><span style=\" font-style:italic;\">snp4,AA,AA</span>\n"
+"<br><span style=\" font-style:italic;\">snp5,BB,AB</span>\n"
+"<br><span style=\" font-style:italic;\">snp6,AA,AA</span>\n"
+"<br><span style=\" font-style:italic;\">snp7,AB,AA</span>\n"
+"<br><span style=\" font-style:italic;\">snp8,AA,--</span>\n"
+"<br><span style=\" font-style:italic;\">snp9,--,AB</span>\n"
+"<br><span style=\" font-style:italic;\">snp10,AB,BB</span></p></body></html>", None))
+        self.FinRep_tab1.setText(_translate("SNPConvert", "Select Final Report", None))
+        self.Input_lbl_tab1.setText(_translate("SNPConvert", "Select input files and formats", None))
+        self.outname_lbl_tab1.setText(_translate("SNPConvert", "Output name", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_MATRIX), _translate("SNPConvert", "Illumina MATRIX format", None))
+        self.SnpChimp_lbl_tab3.setText(_translate("SNPConvert", "SNPchimp file", None))
+        self.AlleleCodIn_lbl_tab3.setText(_translate("SNPConvert", "Input allele coding", None))
+        self.outname_lbl_tab3.setText(_translate("SNPConvert", "Output name", None))
+        self.YesRadioButton_tab3.setText(_translate("SNPConvert", "Yes", None))
+        self.NoRadioButton_tab3.setText(_translate("SNPConvert", "No", None))
+        self.Output_lbl_tab3.setText(_translate("SNPConvert", "Select output formats and filename", None))
+        self.Title_lbl_tab3.setText(_translate("SNPConvert", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:600; color:#138f46;\">iConvert</span><span style=\" font-size:22pt; font-weight:600; color:#000000;\"> software</span></p><p align=\"center\"><span style=\" color:#000000;\"><br/></span><span style=\" font-size:14pt; font-weight:600; color:#000000;\">Allele format and map converter for PLINK (ped/map) files</span></p></body></html>", None))
+        self.PedFile_tab3.setToolTip(_translate("SNPConvert", "<html><head/><body><p>Please select a valid .ped file (according to PLINK software specifics)</p></body></html>", None))
+        self.PedFile_tab3.setText(_translate("SNPConvert", "Select PED file", None))
+        self.MapFile_lbl_tab3.setText(_translate("SNPConvert", "PLINK format MAP file", None))
+        self.PedFile_lbl_tab3.setText(_translate("SNPConvert", "PLINK format PED file", None))
+        self.SnpChimp_tab3.setToolTip(_translate("SNPConvert", "<html><head/><body><p>Please select a valid SNPchimp file - NOTE: the file <span style=\" font-style:italic;\">must</span> contain desired allele conversions! (e.g. select the appropriate options in the &quot;<span style=\" font-weight:600;\">Allele coding</span>&quot; section)</p><p><br/></p></body></html>", None))
+        self.SnpChimp_tab3.setText(_translate("SNPConvert", "Select SNPchimp", None))
+        self.Input_lbl_tab3.setText(_translate("SNPConvert", "Select input files and formats", None))
+        self.Log_lbl_tab3.setText(_translate("SNPConvert", "Runtime log", None))
+        self.UpdateMap_lbl.setText(_translate("SNPConvert", "Update map info", None))
+        self.AlleleCodOut_lbl_tab3.setText(_translate("SNPConvert", "Output allele coding", None))
+        self.ConvertFile_tab3.setText(_translate("SNPConvert", "Run iConvert", None))
+        self.MapFile_tab3.setToolTip(_translate("SNPConvert", "<html><head/><body><p>Please select a valid .map file (according to PLINK software specifics)</p></body></html>", None))
+        self.MapFile_tab3.setText(_translate("SNPConvert", "Select MAP file", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_iConvert), _translate("SNPConvert", "iConvert software", None))
 

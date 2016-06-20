@@ -6,12 +6,12 @@ Created on Nov 6, 2015
 
 import os,sys,time
 from PyQt4 import QtGui
-from SNPConvert_gui import Ui_MainWindow
+from SNPConvert_gui import Ui_SNPConvert
 
 class Main(QtGui.QMainWindow):    
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_SNPConvert()
         self.ui.setupUi(self)
         
         ###############################################
@@ -139,16 +139,16 @@ class Main(QtGui.QMainWindow):
             if 'chromosome' in a.lower():continue  #.lower is used to avoid problems with capital letters
             # Automatic identifier of the separator (at least 4 fields should be enough)
             try: 
-                if len(a.strip().split(','))>4:   
-                    line=a.strip().split(',')[:4]
-                    nn,snpid,cro,pos=line
-                elif len(a.strip().split('\t'))>4:
-                    line=a.strip().split('\t')[:4]
-                    nn,snpid,cro,pos=line
+                if len(a.strip().split(','))>5:   
+                    line=a.strip().split(',')[:5]
+                    nn,snpid,cro,pos,rest=line
+                elif len(a.strip().split('\t'))>5:
+                    line=a.strip().split('\t')[:5]
+                    nn,snpid,cro,pos,rest=line
                 else:
-                    line=a.strip().split()[:4]
-                    nn,snpid,cro,pos=line
-            except ValueError:return self.ui.Log_wdg_tab1.append("<font color=red><b>ERROR: Bad/Corrupt SNP map file! Please check the file!</b></font>")
+                    line=a.strip().split()[:5]
+                    nn,snpid,cro,pos,rest=line
+            except:return self.ui.Log_wdg_tab1.append("<font color=red><b>ERROR: Bad/Corrupt SNP map file! Please check the file and make sure it is an (original) Illumina SnpMap file!</b></font>")
             conv[snpid]=(cro,pos)   #This dictionary keeps map info related to the SNP name
             chroms[cro]=0           #This dictionary is useful only to inform the user
         self.ui.Log_wdg_tab1.append("====> Total number of SNPs processed: <b>%s</b>" % len(conv))    
@@ -258,20 +258,26 @@ class Main(QtGui.QMainWindow):
         self.ui.Log_wdg_tab2.append(" - Output name: <b>%s</b><br>" % self.OutName_tab2)
         
         self.ui.Log_wdg_tab2.append("<b>A) Processing SNP map file file</b>")
-        conv={};sep=''
+        conv={};chroms={}
         for a in open(self.inputSnpMapFile_tab2):
-            if 'Chromosome' in a:continue
-            if len(a.strip().split(','))>=3:sep=',';
-            elif len(a.strip().split('\t'))>=3:sep='\t'
-            else:sep=''
-            if sep:
-                nn,snpid,cro,pos,rest=a.strip().split(sep,4)
-            else:
-                line=a.strip().split()
-                nn,snpid,cro,pos=line[:4]
-            conv[snpid]=(cro,pos)
-        if len(conv)==0:return self.ui.Log_wdg_tab2.append("<font color=red><b>ERROR:</b> The SNP map files seems to be empty!</font><br>")
-        self.ui.Log_wdg_tab2.append("====> Total number of SNPs processed: "+str(len(conv))+'<br>')
+            if 'chromosome' in a.lower():continue  #.lower is used to avoid problems with capital letters
+            # Automatic identifier of the separator (at least 4 fields should be enough)
+            try: 
+                if len(a.strip().split(','))>5:   
+                    line=a.strip().split(',')[:5]
+                    nn,snpid,cro,pos,rest=line
+                elif len(a.strip().split('\t'))>5:
+                    line=a.strip().split('\t')[:5]
+                    nn,snpid,cro,pos,rest=line
+                else:
+                    line=a.strip().split()[:5]
+                    nn,snpid,cro,pos,rest=line
+            except:return self.ui.Log_wdg_tab2.append("<font color=red><b>ERROR: Bad/Corrupt SNP map file! Please check the file and make sure it is an (original) Illumina SnpMap file!</b></font>")
+            conv[snpid]=(cro,pos)   #This dictionary keeps map info related to the SNP name
+            chroms[cro]=0           #This dictionary is useful only to inform the user
+        self.ui.Log_wdg_tab2.append("====> Total number of SNPs processed: <b>%s</b>" % len(conv))    
+        self.ui.Log_wdg_tab2.append("====> Total number of chromosomes found: <b>%s</b>" % len(chroms))
+        self.ui.Log_wdg_tab2.append("====> List of chromosomes found: <b>%s</b><br>" % ','.join(sorted(chroms.keys())))
         
         ### Start processing the Map file first
         self.ui.Log_wdg_tab2.append("<b>B) Processing FinRep file</b>")           
@@ -511,10 +517,9 @@ class Main(QtGui.QMainWindow):
                 SNPdata[lista[othinfo[3]]] = {lista[formats[0]][0]:lista[formats[1]][0],
                                           lista[formats[0]][2]:lista[formats[1]][2]}
 
-        if len(SNPdata) == 0:
-            return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Problem reading SNPchimp file! Probably conversion info not available or headers are incorrect</b></font>")
-        if len(chips)>1: 
-            self.ui.Log_wdg_tab3.append("<font color=orange><b>WARNING: More than 1 chip in SNPchimp file. This might result in incorrect allele conversion!</b></font>")
+        if en == 0:return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: SNPchimp file is empty!</b></font>")
+        if len(SNPdata) == 0:return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Problem reading SNPchimp file! Probable causes: file is empty, conversion info is not available or header is incorrect</b></font>")
+        if len(chips)>1:self.ui.Log_wdg_tab3.append("<font color=orange><b>WARNING: More than 1 chip in SNPchimp file. This might result in incorrect allele conversion!</b></font>")
         self.ui.Log_wdg_tab3.append("- Rows read in SNP chimp file :<b>%s</b>" % str(en+1))
         self.ui.Log_wdg_tab3.append("- SNPs with allele conversion information available :<b>%s</b>" % str(len(SNPdata)))
 
