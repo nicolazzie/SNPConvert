@@ -537,21 +537,23 @@ class Main(QtGui.QMainWindow):
             outnammap = direct_name+slsh+self.OutName_tab3+'.map'
             remap=open(outnammap,'w')
         enmap=0
-        for enmap,line in enumerate(open(self.inputMapFile_tab3)):
+        for enm,line in enumerate(open(self.inputMapFile_tab3)):
             #Check for tab or blank space spearator (only these 2 are accepted here)       
-            if enmap == 0: 
-                test = line.strip().split('\t')
+            if enm == 0: test = line.strip().split('\t')
             if len(test) == 4:   # Warning: this only accepts "normal" MAP files (no --map3 or other options are allowed) 
                 linea = line.strip().split('\t')
                 tab = True
-            else: linea = line.strip().split()
+            else: 
+                linea = line.strip().split()
+            if len(linea) == 0: continue # Skips void lines
+            enmap+=1
             snp = linea[1]
             maporder.append(snp)
             if not SNPdata.has_key(linea[1]):return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: SNP: "+ snp +" not found in SNPchimp file. Probable causes: you downloaded the wrong SNPchip or modified SNP names </b></font>") 
             else:convert.append(SNPdata[linea[1]])
             if self.UpdateMap:remap.write('%s %s %s %s\n' % (mapupd[snp][0],snp,linea[2],mapupd[snp][1]))
         if enmap==0:return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: MAP file is empty!</b></font>")
-        self.ui.Log_wdg_tab3.append("- Rows read in PLINK MAP file (number of SNPs) : <b>%s</b>" % str(enmap+1))
+        self.ui.Log_wdg_tab3.append("- Rows read in PLINK MAP file (number of SNPs) : <b>%s</b>" % str(enmap))
         if self.UpdateMap: self.ui.Log_wdg_tab3.append("<font color=blue>- MAP file updated: <b>%s</b></font>" % outnammap)
 
         # Process PED file (if required)
@@ -572,15 +574,16 @@ class Main(QtGui.QMainWindow):
             for enped,line in enumerate(open(self.inputPedFile_tab3)):
                 if enped == 0:
                     test = line.strip().split('\t')
-                    if len(test) == (6 + (enmap + 1) * 2): tab = True
+                    if len(test) == (6 + enmap * 2): tab = True
                 if tab: pedline = line.strip().split('\t')
                 else: pedline = line.strip().split()
-                if ((enmap+1)*2+6) != len(pedline):
-                    return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Number of SNPs in PLINK MAP (" +str(enmap+1)+") should result in "+str((enmap+1)*2+6)+" columns PLINK PED but found "+str(len(pedline))+"<br>Check your .ped and .map files. Usually the problem is in the first line(s)...</font><br>")
-                genotypes = [pedline[6 + x] + pedline[7 + x] for x in range(0, ((enmap+1)*2)-1, 2)]
+                if (enmap*2+6) != len(pedline):
+                    return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Number of SNPs in PLINK MAP (" +str(enmap)+") should result in "+str(enmap*2+6)+" columns PLINK PED but found "+str(len(pedline))+"<br>Check your .ped and .map files. Usually the problem is in the first line(s)...</font><br>")
+                genotypes = [pedline[6 + x] + pedline[7 + x] for x in range(0, (enmap*2)-1, 2)]
                 seq = -1
                 genout = []
                 nfailed = 0
+                name_snps=[]
                 for alle in genotypes:
                     seq += 1
                     alle1 = alle[0];alle2 = alle[1]
@@ -592,9 +595,10 @@ class Main(QtGui.QMainWindow):
                         genout.append(convert[seq][alle2])
                     except KeyError:
                         nfailed += 1
+                        name_snps.append(maporder[seq])
                 if nfailed:
                     return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: Individual " + pedline[1] + " failed conversion for " + str(nfailed) + \
-                                                       " SNPs. Probably their IN format is not as specified (or you specified a wrong missing value)</font>")
+                                                       " SNPs [ "+', '.join(name_snps)+"]. Probably their INPUT allele coding format is not as specified</font>")
                 reped.write('%s %s\n' % (' '.join(pedline[:6]),' '.join(genout)))
             if enped==0:return self.ui.Log_wdg_tab3.append("<font color=red><b>ERROR: PED file is empty!</b></font>")
             self.ui.Log_wdg_tab3.append("- Rows read in PLINK PED file (number of animals) : <b>%s</b>" % str(enped + 1))
