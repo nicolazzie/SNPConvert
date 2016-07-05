@@ -7,7 +7,7 @@ The goal of this suite of programs is to help users doing some routine work with
 This directory includes a GUI for Windows and Mac users (64bit) and source codes, so you're able to see what it is doing step by step (please see "Disclaimer" section).
 
 
-### **1) Getting the programs and requirements**
+### **1.a) Getting the programs and requirements**
 The fastest and more clever way of getting the GUI and all the source codes is cloning this repository (you need 'git' installed, of course!).
 Further information on how to install git can be found at: http://git-scm.com/book/en/Getting-Started-Installing-Git . An example of cloning command using command line is: 
 
@@ -16,8 +16,12 @@ Further information on how to install git can be found at: http://git-scm.com/bo
 The GUI was tested on Windows10 and Mac computers (64bits). Running the GUI has no requirements (just decompress and double click on the executable).
 Source codes were fully tested on Linux/Unix/Mac. To run these programs you need Python (2.6+, although 2.7+ or latest is highly recommended for better performances) installed on your computer. 
 
+### **1.b) How to cite the tool**
+If you use this tool for your reseach please cite:
+ - Nicolazzi E.L., Marras G., Stella A. (2016) [SNPConvert: SNP Array Standardization and Integration in Livestock Species](http://www.mdpi.com/2076-3905/5/2/17). Microarrays 5:17
 
-### ** 2) >> BETA >> SNPConvert v1.0
+
+### ** 2) SNPConvert v1.0
 SNPConvert is a all-in-one user-friendly GUI for Windows and Mac 64bit users. 
 Linux users are required to use the source codes from command line (See section 3). SNPConvert is a simple GUI built from three programs you'll find in the "source_codes" folders. In fact, SNPConvert is able to convert any Illumina SNP-array raw format (ROW and MATRIX formats) to PLINK (PED & MAP), modify the allele coding of the file and the map information for any PLINK file (using SNPchimp output files). This GUI was built using PyQT project (full code provided). SNPConvert has 3 functionallities:
   - Illumina ROW format: this option converts formats from Illumina ROW to PLINK (PED & MAP). It requires 2 input files: a "FinalReport" file in **ROW** format and a SNP map file (both provided by the genotyping lab). Please see the _ExampleData_ folder to see what a (fake) FinalReport in ROW format looks like. The user is then free of choosing the output allele coding, the population ID used (e.g. first column in PLINK PED file), and the output filename. The resulting file will be placed in the same folder of the input FinalReport file. A runtime log window will guide the user on the process and outcomes of the program.
